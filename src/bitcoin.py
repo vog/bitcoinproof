@@ -103,6 +103,13 @@ def b58decode_nolong(s):
     result = convert_base_fast([b58values[c] for c in s], (58, 4), (256, 3))
     return (chr(0) * padding) + ''.join(chr(d) for d in result)
 
+def ripemd160_to_address(ripemd160_digest):
+    '''Convert a RIPEMD-160 hash (or any other 160-bit string) to a bitcoin address'''
+    assert len(ripemd160_digest) == 160 / 8
+    versioned_digest = '\x00' + ripemd160_digest
+    checksum = hashlib.sha256(hashlib.sha256(versioned_digest).digest()).digest()[:4]
+    return versioned_digest + checksum
+
 def hr_address(prefix):
     '''Generate human-readable pseudo-addresses'''
     # 'W11111' in b58 is the mean value ('W' = 29 = 58/2),
@@ -111,8 +118,7 @@ def hr_address(prefix):
     address_bin = b58decode(prefix + 'W11111')
     assert len(address_bin) == 25
     assert address_bin[0] == '\x00'
-    checksum = hashlib.sha256(hashlib.sha256(address_bin[:-4]).digest()).digest()[:4]
-    address = b58encode(address_bin[:-4] + checksum)
+    address = b58encode(ripemd160_to_address(address_bin[1:-4]))
     assert address.startswith(prefix)
     return address
 
