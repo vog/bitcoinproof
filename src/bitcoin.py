@@ -110,6 +110,15 @@ def ripemd160_to_address(ripemd160_digest):
     checksum = hashlib.sha256(hashlib.sha256(versioned_digest).digest()).digest()[:4]
     return versioned_digest + checksum
 
+def sha256_to_address(sha256_digest):
+    '''Convert a SHA-256 hash of a public key (or of any other binary data) to a bitcoin address'''
+    assert len(sha256_digest) == 256 / 8
+    return ripemd160_to_address(hashlib.new('ripemd160', sha256_digest).digest())
+
+def publickey_to_address(publickey):
+    '''Convert a bitcoin public key (or any other binary data) to a bitcoin address'''
+    return sha256_to_address(hashlib.sha256(publickey).digest())
+
 def hr_address(prefix):
     '''Generate human-readable pseudo-addresses'''
     # 'W11111' in b58 is the mean value ('W' = 29 = 58/2),

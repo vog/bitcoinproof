@@ -1,4 +1,9 @@
 {
+"bitcoinproof":[
+{"data":"","addr":"1HT7xU2Ngenf7D4yocz2SAcnNLW7rK8d4E"},
+{"data":"test","addr":"1Kr5p3MfMMXmC2Atkt6ou4ocrZKaUAJZnR"},
+{"data":"Dear audience,\n\nThe bitcoin network will confirm that I wrote\nthis exact message before 2013-03-29 12:00:00 UTC.\n\n-- Volker Grabsch <vog@notjusthosting.com>\n","addr":"1Ha623pBF6wNHNa7Dknxi8ovigB1P5zuR7"}
+],
 "human-readable":[
 {"sha256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","addr":[
     "1SHA256x1xe3boc44298fc1c14xWi9GDD",

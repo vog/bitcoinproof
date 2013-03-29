@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 
-import hashlib
 import sys
 
 sys.path.append('src')
 import bitcoin
 
-s = sys.stdin.read()
-sha256_hexdigest = hashlib.sha256(s).hexdigest()
-for address in bitcoin.sha256_to_hr_addresses(sha256_hexdigest):
-    print address
+data = sys.stdin.read()
+print bitcoin.b58encode(bitcoin.publickey_to_address(data))

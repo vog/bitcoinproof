@@ -8,6 +8,8 @@ import bitcoin
 
 with open('src/testdata.json', 'r') as f:
     testdata = json.load(f)
+    for timeproof in testdata['bitcoinproof']:
+        assert bitcoin.b58encode(bitcoin.publickey_to_address(timeproof['data'])) == timeproof['addr']
     for hr in testdata['human-readable']:
         assert bitcoin.hash_to_hr_addresses('SHA256', hr['sha256']) == hr['addr']
     for addr in testdata['addresses']:
