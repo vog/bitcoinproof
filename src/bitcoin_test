@@ -2,11 +2,9 @@
 
 import json
 import sys
-
-sys.path.append('src')
 import bitcoin
 
-with open('src/testdata.json', 'r') as f:
+with open('testdata.json', 'r') as f:
     testdata = json.load(f)
     for timeproof in testdata['bitcoinproof']:
         assert bitcoin.b58encode(bitcoin.publickey_to_address(timeproof['data'])) == timeproof['addr']
