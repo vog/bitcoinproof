@@ -1,4 +1,4 @@
-'''Using the bitcoin network to connect an information with its timestamp such that it could stand up in court'''
+'''Create a forgery-proof timestamp for your data, secured by the bitcoin network.'''
 
 __copyright__ = '''\
 Copyright (C) 2013 Volker Grabsch <vog@notjusthosting.com>
