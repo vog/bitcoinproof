@@ -53,6 +53,12 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
                 margin-bottom: 15pt;
                 padding: 1em;
             }
+            p {
+                text-align: justify;
+                font-family: serif;
+                padding-left: 50pt;
+                padding-right: 50pt;
+            }
             a {
                 text-decoration: none;
             }
@@ -208,5 +214,96 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         <a href="https://github.com/vog/bitcoinproof" target="_blank">
             <img class="ribbon" src="lib/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub">
         </a>
+        <h1>Background</h1>
+        <p>
+            Sometimes you want to prove
+            that a certain event happened <em>before</em> a certain point in time.
+            Maybe you want to prove
+            that the damage in your flat already existed when you settled in.
+            Or that you were in possession of this great artwork before it was published,
+            proving you are the author.
+        </p>
+        <p>
+            Of course,
+            on your computer all documents and photos have timestamps,
+            but those are easy to forge.
+            To get a proof that can stand up in court,
+            you need something better.
+        </p>
+        <p>
+            So what can you do?
+            Traditionally, you would consult a trusted authority such as a
+            <a href="https://en.wikipedia.org/wiki/Notary">notary</a>.
+            However, that's quite costly and takes a lot of time.
+            You could also use a digital
+            <a href="https://en.wikipedia.org/wiki/Trusted_timestamping">trusted timestamping</a>
+            service,
+            which is fast but still very costly
+            due to the special hardware and expensive audits
+            that such a company needs in order to stay trustworthy.
+            Or you could simply use the
+            <a href="https://en.wikipedia.org/wiki/Bitcoin">bitcoin network</a>,
+            which is cheap and doesn't require you to trust anyone.
+            There's just one issue:
+            The bitcoin network is designed to protect payment transactions,
+            not arbitrary data.
+        </p>
+        <p>
+            So how do you get the bitcoin network to timestamp your data?
+            You need to put a
+            <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function">crypto hash</a>
+            of your data
+            somewhere into a valid payment transaction.
+            It would be easy if there was a <em>purpose</em> field,
+            but bitcoin transactions
+            have just <em>addresses</em> (account numbers) and <em>values</em>.
+            Encoding your crypto hash into those two fields
+            is a tricky task,
+            so people are tempted to make it
+            <a href="https://github.com/fireduck64/BitcoinTimestamp">more complicated</a>
+            than it has to be,
+            or <a href="https://github.com/goblin/chronobit">outright cumbersome</a>.
+            Luckily,
+            there is a
+            <a href="https://bitcointalk.org/index.php?topic=24605.msg306510#msg306510">simple solution</a>
+            that needs only one transaction to one address.
+        </p>
+        <p>
+            The solution is easily understood if you know
+            that a bitcoin <em>account</em> is a
+            <a href="https://en.wikipedia.org/wiki/Public-key_cryptography">public/private key pair</a>,
+            but its <em>address</em> (account number)
+            is just a crypto hash of the public key, not the public key itself.
+            And this crypto hash can be computed for any data, not just public keys.
+            In other words, you can safely make a bitcoin address from any data,
+            although it won't correspond to any real bitcoin account.
+            So be careful not to throw much money at such an address,
+            because you
+            <a href="https://bitcointalk.org/index.php?topic=8728.msg203511#msg203511">won't ever get it back</a>.
+            Ideally, you would send 0 BTC to that address,
+            which is a
+            <a href="https://en.bitcoin.it/wiki/Transactions#general_format_.28inside_a_block.29_of_each_output_of_a_transaction_-_Txout">valid transaction</a>,
+            but most likely unsupported by your bitcoin client.
+            Sending a tiny 0.00000001&nbsp;BTC does the trick as well,
+            and is still negligible
+            compared to the additional transaction costs of currently 0.0005&nbsp;BTC.
+        </p>
+        <p>
+            This sounds all well and good,
+            but of course it raises two moral questions:
+            First, isn't this a misuse of the bitcoin network?
+            Indeed this is a somewhat creative use of the network,
+            but it won't do any harm.
+            You are still paying the transaction fee
+            which goes directly to the
+            <a href="https://en.wikipedia.org/wiki/Bitcoin#Bitcoin_mining">people who secure the timestamps</a>.
+            Second, don't we damage the bitcoin currency if we destroy money?
+            Well, 100&nbsp;million of these tiny transactions
+            will cause the same damage to the currency as
+            one unlucky guy owning 1&nbsp;BTC and losing his wallet.
+            But if you are really worried,
+            you can use a specialized bitcoin client
+            that allows you to send 0&nbsp;BTC.
+        </p>
     </body>
 </html>
