@@ -1,7 +1,7 @@
 '''Create a forgery-proof timestamp for your data, secured by the bitcoin network.'''
 
 __copyright__ = '''\
-Copyright (C) 2013 Volker Grabsch <vog@notjusthosting.com>
+Copyright (C) 2013 Volker Grabsch <v@njh.eu>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
