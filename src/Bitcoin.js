@@ -77,13 +77,13 @@ Bitcoin = {
         });
     },
     verifyResult: function(params) {
-        var url = 'http://blockchain.info/de/q/addressfirstseen/' + params.result.base58 + '?confirmations=6';
+        var url = 'https://blockchain.info/q/addressfirstseen/' + params.result.base58 + '?confirmations=6';
         var req = new XMLHttpRequest();
         req.onload = function() {
             console.log(req.responseText);
             var result = {};
             for (var k in params.result) result[k] = params.result[k];
-            if (req.responseText === 'null') {
+            if (req.responseText === 'null' || req.responseText === '0') {
                 result.timestamp = null;
             } else {
                 result.timestamp = new Date(req.responseText * 1000);
