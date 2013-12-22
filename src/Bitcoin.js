@@ -83,7 +83,11 @@ Bitcoin = {
             console.log(req.responseText);
             var result = {};
             for (var k in params.result) result[k] = params.result[k];
-            result.timestamp = req.responseText === 'null' ? null : new Date(req.responseText * 1000);
+            if (req.responseText === 'null') {
+                result.timestamp = null;
+            } else {
+                result.timestamp = new Date(req.responseText * 1000);
+            }
             params.callback.call(params.scope, result);
         };
         req.open('GET', url);
